@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Detección de Personas y Género en Video</title>
+</head>
+
+<body>
+
+    <div class="App">
+        <div class='card text-bg-dark '>
+            <div class="card-header">
+                Modelo de detección <strong> YOLOv5</strong>
+            </div>
+            <div class='container'>
+
+                <img src="{{ url_for('video_feed') }}" width="640" height="480" />
+                <hr />
+            </div>
+
+            <div class="card-body">
+
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Definicion del modelo
+                </button>
+
+
+                <div class="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content text-bg-dark">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Definición YOLOv5</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+
+                                    El modelo YOLOv5 (You Only Look Once) es una de<br />
+                                    las arquitecturas más populares para la detección<br />
+                                    de objetos en imágenes y videos. Se caracteriza<br />
+                                    por ser rápida y eficiente, y es ampliamente utilizado<br />
+                                    en aplicaciones de visión por computadora. En tu <br />
+                                    proyecto, utilizaste YOLOv5 para detectar personas<br />
+                                    en tiempo real en un video.<br /><br />
+
+                                    Explicación del modelo YOLOv5<br /><br />
+                                    <strong> 1. ¿Qué es YOLOv5?</strong><br /><br />
+                                    YOLOv5 es una versión de la popular serie de modelos YOLO,<br />
+                                    que se enfoca en ladetección de objetos. La principal<br />
+                                    diferencia de YOLO con otros modelos de detección es que<br />
+                                    realiza la detección de objetos en una sola pasada <br />
+                                    (de ahí el nombre "You Only Look Once"). Esto lo hace<br />
+                                    extremadamente rápido y adecuado para aplicaciones en<br />
+                                    tiempo real, como la detección en video.<br /><br />
+
+                                    YOLOv5 es un modelo de red neuronal convolucional (CNN)<br />
+                                    que, a diferencia de otros modelos, realiza la detección<br />
+                                    de objetos directamente en las imágenes, produciendo<br />
+                                    simultáneamente las cajas delimitadoras (bounding boxes),<br />
+                                    las clases de los objetos y la confianza de la predicción.<br /><br />
+
+                                    <strong>2. Arquitectura de YOLOv5</strong><br /><br />
+                                    La arquitectura de YOLOv5 se basa en una serie de componentes:<br /><br />
+
+                                    Backbone: Es la parte encargada de extraer las características<br />
+                                    de la imagen. Utiliza una red como CSPDarknet53, que es eficiente<br />
+                                    en la extracción de características de diferentes escalas.<br /><br />
+
+                                    Neck: Esta parte ayuda a generar las predicciones de objetos.<br />
+                                    Utiliza PANet (Path Aggregation Network) para mejorar la<br />
+                                    precisión en la detección de objetos a diferentes escalas.<br /><br />
+
+                                    Head: Esta parte es la encargada de generar las predicciones <br />
+                                    finales de las cajas delimitadoras, clases y puntuaciones de <br />
+                                    confianza. Utiliza una arquitectura con tres salidas:<br /><br />
+
+                                    Bounding boxes: coordenadas de las cajas delimitadoras.<br />
+                                    Class predictions: la clase del objeto detectado (por ejemplo,<br />
+                                    persona, coche, etc.).<br /><br />
+
+                                    Objectness score: la confianza de que un objeto está presente<br />
+                                    en la caja.<br /><br />
+
+                                    <strong>3. Entrenamiento de YOLOv5</strong> <br /><br />
+                                    Para entrenar un modelo YOLOv5, se necesita un conjunto de datos <br />
+                                    etiquetado que contenga imágenes con las clases de objetos a <br />
+                                    detectar y las coordenadas de las cajas delimitadoras. Cada imagen<br />
+                                    en el conjunto de datos debe tener un archivo de texto asociado<br />
+                                    con las coordenadas de las cajas y las clases.<br /><br />
+
+                                    YOLOv5 tiene varias versiones preentrenadas, como yolov5s (más rápido<br />
+                                    pero menos preciso) y yolov5x (más preciso pero más lento). En tu<br />
+                                    proyecto, usaste yolov5s, que es una versión más ligera y adecuada <br />
+                                    para aplicaciones en tiempo real.<br /><br />
+
+
+                                    <strong>4. Precisión de YOLOv5</strong><br /><br />
+                                    En cuanto a la precisión de YOLOv5, dependiendo de la versión<br />
+                                    y el conjunto de datos en el que se entrene, los resultados varían.<br />
+                                    Por ejemplo:<br /><br />
+
+                                    <strong>COCO Dataset: </strong>En el conjunto de datos COCO (un conjunto de datos grande<br />
+                                    y diverso que incluye 80 clases), YOLOv5 generalmente obtiene resultados<br />
+                                    cercanos a:<br /><br />
+
+                                    <strong>Precisión (mAP 0.5):</strong> 44.5% (esto significa la precisión promedio de<br />
+                                    las predicciones con un umbral de IoU de 0.5).<br /><br />
+
+                                    <strong> mAP 0.5:0.95 (considerando múltiples umbrales de IoU):</strong> alrededor de 40%.<br /><br />
+
+                                    <strong>IoU:</strong> Generalmente se fija un umbral de IoU de 0.5 para considerar<br />
+                                    una predicción correcta, pero también se pueden considerar umbrales<br />
+                                    más altos para una detección más estricta.<br /><br />
+
+                                    <strong>PASCAL VOC Dataset:</strong> YOLOv5 generalmente obtiene un mAP de alrededor<br />
+                                    del 70% para este conjunto de datos, que es menos complejo que COCO<br />
+                                    debido a la menor cantidad de clases (20).<br /><br />
+
+                                    <strong>Comparación de versiones de YOLOv5</strong><br />
+                                    Las diferentes versiones de YOLOv5 tienen variaciones en precisión y
+                                    velocidad:<br /><br />
+
+                                    <strong> 1.YOLOv5s (small):</strong> Es la versión más rápida y ligera, con un compromiso en
+                                    precisión.<br /><br />
+
+                                    mAP 0.5: ~44%<br />
+                                    mAP 0.5:0.95: ~40%<br /><br />
+
+
+                                    <strong> YOLOv5m (medium): </strong> Mejor rendimiento que s, con una mayor precisión pero menos
+                                    velocidad.<br /><br />
+
+                                    mAP 0.5: ~46%<br />
+                                    mAP 0.5:0.95: ~42%<br /><br />
+
+                                    <strong>YOLOv5l (large):</strong> Versión más precisa pero más lenta.<br /><br />
+                                    mAP 0.5: ~48%<br />
+                                    mAP 0.5:0.95: ~44%<br /><br />
+
+
+                                    <strong>YOLOv5x (extra-large):</strong> La versión más precisa, pero la más lenta en cuanto a
+                                    velocidad.<br /><br />
+
+                                    mAP 0.5: ~50%<br />
+                                    mAP 0.5:0.95: ~46%<br /><br />
+
+
+                                    <strong>Factores que afectan la precisión de YOLOv5</strong><br />
+                                    <strong> Calidad y tamaño del conjunto de datos:</strong> El modelo se entrena mejor con más datos
+                                    y<br />
+                                    con datos bien etiquetados. Si hay ruido o inconsistencias en las etiquetas,
+                                    puede<br />
+                                    reducir la precisión.<br /><br />
+
+                                    <strong>Análisis de objetos pequeños:</strong> YOLOv5 es generalmente más preciso con objetos
+                                    grandes<br />
+                                    en la imagen, pero puede perder precisión con objetos pequeños, especialmente si
+                                    no<br />
+                                    se entrenó específicamente para ello.<br /><br />
+
+                                    <strong>Umbral de IoU:</strong> Al ajustar el umbral de IoU (por ejemplo, 0.4, 0.5, 0.6), se
+                                    puede<br />
+                                    cambiar el comportamiento de la precisión. Un umbral más alto puede resultar
+                                    en<br />
+                                    menos falsas detecciones pero también en más falsos negativos.<br /><br />
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #282c34;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .App {
+        text-align: center;
+    }
+
+    .App-logo {
+        height: 40vmin;
+        pointer-events: none;
+    }
+
+    video {
+        transform: scaleX(-1);
+        /* Inversión horizontal */
+        display: block;
+        margin: auto;
+    }
+
+    .modal-body p {
+        text-align: justify;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .App-logo {
+            animation: App-logo-spin infinite 20s linear;
+        }
+    }
+
+    .App-header {
+        background-color: #282c34;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        color: white;
+    }
+
+    .App-link {
+        color: #61dafb;
+    }
+
+    .container {
+        padding: 20px 40px;
+    }
+
+    .accordion {
+        background-color: #282c34;
+        color: white;
+
+    }
+
+    .definition {
+        text-align: center;
+        width: 100%;
+    }
+
+    video {
+        border-radius: 10px;
+    }
+
+    @keyframes App-logo-spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+</html>
